@@ -1,0 +1,42 @@
+import methodLookupCiv.*
+test "puntajes" { 
+		juego.baseComercio(5)
+		juego.baseCultural(8)
+		
+    var fenicia = new CivilizacionComercial(
+			20, 15, 100,    // cientifico, militar, economico
+			5, 6            // tratadosComerciales, escuelasContables
+		)
+
+    var cartago = new CivilizacionComercialSuper(
+			20, 35, 100,    // cientifico, militar, economico
+			10, 4           // tratadosComerciales, escuelasContables
+		)
+	
+	var mileto = new CivilizacionCultural (
+			40, 50, 20,     // cientifico, militar, economico
+			6, 9            // museos, universidades
+		)
+		
+	
+	var esparta = new CivilizacionMilitar (
+			5, 200, 45      // cientifico, militar, economico
+		)
+
+	var delfos = new CivilizacionPoetica (
+			60, 2, 20,      // cientifico, militar, economico
+			10, 2,          // museos, universidades
+			"Delfos la bella"    // nombre, tiene 15 letras
+		)
+		
+		assert.equals(/* fenT */, fenicia.puntaje())
+		assert.equals(/* fenC */, fenicia.puntajeCientifico())
+		assert.equals(/* carT */, cartago.puntaje())
+		assert.equals(/* carC */, cartago.puntajeCientifico())
+		assert.equals(/* milT */, mileto.puntaje())
+		assert.equals(/* milC */, mileto.puntajeCientifico())
+		assert.equals(/* espT */, esparta.puntaje())
+		assert.equals(/* espC */, esparta.puntajeCientifico())
+		assert.equals(/* delT */, delfos.puntaje())
+		assert.equals(/* delC */, delfos.puntajeCientifico())
+}

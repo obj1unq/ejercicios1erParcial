@@ -1,0 +1,613 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[spanish,es-tabla]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{appendix}
+\usepackage[none]{hyphenat}
+\usepackage{bbm}
+\usepackage{mathrsfs}
+\usepackage{multicol}
+\usepackage[all]{xy}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{graphicx}
+\usepackage{longtable} 
+\usepackage{listings}
+\usepackage{color}
+\usepackage[T1]{fontenc} 
+
+\usepackage{enumerate}
+
+\setlength{\parskip}{10pt}
+\setlength\parindent{0pt}
+
+
+\newcounter{ej}
+\newcounter{prte}
+\newcommand{\ejercicio}[1]{\stepcounter{ej} \setcounter{prte}{0} \par \textbf{ Ejercicio \arabic{ej}: #1} \\ }
+\newcommand{\parte}[1]{\stepcounter{prte} \par {\it \textbf{ Parte \arabic{prte}:} #1}\\}
+
+\renewcommand{\appendixname}{Apéndices}
+
+\newcommand{\aclaracion}[2]{\textbf{#1} #2}
+\newcommand{\nota}[1]{\aclaracion{Nota:}{#1}}
+\newcommand{\atencion}[1]{\aclaracion{¡Ojo con esto!}{#1}}
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+
+\newcommand{\sthat}{\ensuremath{\,/\,}}
+\newcommand{\fall}{\textnormal{ for all }}
+\newcommand{\partsof}{\mathscr{P}}
+
+\newcommand{\conju}[1]{\overline{#1}}
+\newcommand{\eqdfn}{:=}
+\newcommand{\setln}[1]{|\,#1\,|}
+\newcommand{\vabs}[1]{\setln{#1}}
+
+\newcommand{\refdfn}[1]{dfn. \ref{dfn:#1}}
+\newcommand{\refeq}[1]{(\ref{eq:#1})}
+\newcommand{\reflem}[1]{lemma \ref{rsl:#1}}
+\newcommand{\refLem}[1]{Lemma \ref{rsl:#1}}
+
+\newcommand{\trst}{\ensuremath{\mathcal{T}}}
+
+\newcommand{\metathen}{\ \Rightarrow \ }
+\newcommand{\divides}{\,|\, }
+
+\newcommand{\req}{\textbf{Requerimiento:}}
+
+\newcommand{\resize}{
+\addtolength{\voffset}{-1.5cm}
+\addtolength{\textheight}{3cm}
+\addtolength{\hoffset}{-0.8cm}
+\addtolength{\textwidth}{2cm}
+}
+
+
+
+%formato
+\newcommand{\code}[1]{\begin{small}\texttt{#1}\end{small}}
+\newcommand{\set}[1]{\code{\#\{#1\}}}
+\newcommand{\lista}[1]{\code{[#1]}}
+\newcommand{\st}[1]{"#1"}
+
+
+\newcommand{\tema}{Guía 8 - Ejercicios adicionales para el primer parcial}
+\newcommand{\fecha}{15/05/2017}
+
+
+
+\resize
+
+
+\pagestyle{fancyplain}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.5	pt}
+\lhead{}
+\chead{\fecha\ -- Objetos 1. TPI. UNQ. 2016}
+\rhead{}
+\lfoot{}
+\cfoot{P\'agina \thepage\ de \pageref{LastPage}}
+\rfoot{}
+
+\fancypagestyle{firststyle}
+{
+\lhead{}
+\chead{}
+\rhead{}
+\lfoot{}
+\cfoot{P\'agina \thepage\ de \pageref{LastPage}}
+\rfoot{}
+}
+
+\newif\ifcodecolor
+
+\codecolortrue
+
+\definecolor{eclipseBlue}{gray}{0.2}
+\definecolor{eclipseGreen}{gray}{0.6}
+\definecolor{eclipsePurple}{gray}{0.4}
+
+\ifcodecolor
+ \definecolor{eclipseBlue}{RGB}{42,0.0,255}
+ \definecolor{eclipseGreen}{RGB}{63,127,95}
+ \definecolor{eclipsePurple}{RGB}{127,0,85}
+\fi
+
+
+\lstdefinelanguage{Wollok}
+{
+  basicstyle=\scriptsize\ttfamily, % Global Code Style
+  captionpos=b, % Position of the Caption (t for top, b for bottom)
+  extendedchars=true, % Allows 256 instead of 128 ASCII characters
+  tabsize=2, % number of spaces indented when discovering a tab 
+  columns=fixed, % make all characters equal width
+  keepspaces=true, % does not ignore spaces to fit width, convert tabs to spaces
+  showstringspaces=false, % lets spaces in strings appear as real spaces
+  breaklines=true, % wrap lines if they don't fit
+  frame=trbl, % draw a frame at the top, right, left and bottom of the listing
+  frameround=tttt, % make the frame round at all four corners
+  framesep=4pt, % quarter circle size of the round corners
+  numbers=left, % show line numbers at the left
+  numberstyle=\tiny\ttfamily, % style of the line numbers
+  commentstyle=\color{eclipseGreen}, % style of comments
+  keywordstyle=\color{eclipsePurple}, % style of keywords
+  stringstyle=\color{eclipseBlue}, % style of strings
+  % list of keywords
+  morekeywords={
+    import,
+    if,
+    object,
+    class,
+    var,
+    return,
+    method,
+    override,
+    new,
+    constructor,
+    test,
+    throw,
+    self,
+    inherits
+  },
+  sensitive=true, % keywords are not case-sensitive
+  morecomment=[l]{//}, % l is for line comment
+  morecomment=[s]{/*}{*/}, % s is for start and end delimiter
+  morestring=[b]" % defines that strings are enclosed in double quotes
+}
+
+\begin{document}
+\lstset{language=Wollok,
+  	inputencoding=utf8,
+    extendedchars=true,
+    caption=\lstname ,
+    literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1 {ñ}{{\~n}}1,
+}
+
+\thispagestyle{firststyle}
+
+
+\begin{center}
+{\Large \textbf{\tema\ \\
+Objetos 1 -- UNQ \\[2mm]
+\fecha}} \\
+\end{center}
+\bigskip
+
+\section{Method Lookup}
+\ejercicio{Virus}
+
+A partir de las siguientes definiciones de clase, y considerando las variables definidas en el test
+
+\medskip\noindent
+\lstinputlisting[language=Wollok]{methodLookupVirus.wlk}
+
+\lstinputlisting[language=Wollok,firstline=2]{methodLookupVirusTest.wtest}
+
+
+Se pide:
+
+\begin{enumerate}
+\item 
+Indicar qué atributos tiene cada uno de los cuatro virus creados en el test.
+
+\item 
+Indicar cuáles de ellos cambian su valor si a cada uno le envío el mensaje \texttt{infectar(pepe)}.
+
+\item 
+Supongamos que \texttt{virus4} tiene 8 de densidad, 10 dosis de líquido y 300 de potencia. ¿Quiere infectar? Explicar por qué.
+
+\item 
+Agregamos este método en \texttt{VirusConLiquido} \\
+\verb2       method quiereInfectar() = dosisLiquido > 52 \\
+¿cómo cambia la respuesta del punto anterior?
+
+\item 
+Para cada uno de estos mensajes, indicar cuáles de los cinco objetos los entienden
+\begin{enumerate}
+	\item \texttt{comerMiel}
+	\item \texttt{quiereInfectar}
+	\item \texttt{peso}
+	\item \texttt{tieneExperiencia}
+	\item \texttt{estaRobusto}
+\end{enumerate}
+
+\item 
+Con el código original, supongamos que la potencia de virus3 es 150 y de los otros tres es 3000, el peso de virus1 y virus2 es 40, y la densidad de virus4 es 35. 
+Si le pregunto a cada uno si quiereInfectar, ¿qué me responde?
+
+\item 
+Con el código original, agreguemos esta variable al test \\
+\verb2       var virus5 = new VirusMusculoso()2 \\
+y supongamos que tanto virus4 como virus5 tienen: 50 como valor del atributo densidad, y 1800 como valor del atributo potencia.
+Si les pregunto a virus4 y a virus5 si están robustos, ¿qué me responde en cada caso? Explicar.
+
+\item
+Agregar las siguientes variantes de virus
+\begin{enumerate}
+	\item 
+	\texttt{VirusConLiquidoSabio}, es como los virus líquidos, con la única diferencia que si tiene más de 50 dosis de líquido entonces tiene experiencia, independientemente de la cantidad de infectados. Si no llega a 50 dosis, entonces sí corre la condición que trae de la clase Virus.
+	\item
+	\texttt{VirusFiaca}: nunca quiere infectar.
+\end{enumerate}
+
+\end{enumerate}
+
+
+\ejercicio{Civilizaciones}
+
+El código que sigue define las clases 
+\texttt{Civilizacion}, \texttt{CivilizacionComercial}, \\
+\texttt{CivilizacionComercialSuper}, \texttt{CivilizacionCultural},
+\texttt{CivilizacionMilitar} y \\ \texttt{CivilizacionPoetica}, además del objeto
+\texttt{juego}.
+
+\medskip\noindent
+\lstinputlisting[language=Wollok]{methodLookupCiv.wlk}
+
+Se pide: 
+
+a) \\
+Armar el diagrama de clases que incluya las 6 clases definidas, indicando la herencia y qué métodos se definen en cada una.
+
+\medskip\noindent
+b) \\
+Indicar qué valores hay que poner en reemplazo de \\
+\texttt{fenT, fenC, carT, carC, milT, milC, espT, espC, delT, delC} \\
+para que el siguiente test dé verde.
+
+
+\noindent
+\lstinputlisting[language=Wollok,firstline=2]{methodLookupCivTest.wtest}
+
+c) \\
+Indicar cómo implementar la clase \texttt{CivilizacionMilitar} si se quiere preservar los puntajes científico y económico, pero que no influyan en el puntaje total. 
+P.ej. si queremos que en el test anterior, el puntaje total de Esparta sea el mismo que se calculó, pero el puntaje científico sea 5 y el económico 45.
+
+\medskip
+
+\textbf{Respuestas} del punto b) \\[4pt]
+\begin{tabular}{lll}
+Fenicia & total & 190 \\
+Fenicia & científico & 50 \\
+Cartago & total & 295 \\
+Cartago & científico & 60 \\
+Mileto & total & 230 \\
+Mileto & científico & 112 \\
+Esparta & total & 200 \\
+Esparta & científico & 0 \\
+Delfos & total & 155 \\
+Delfos & científico & 76
+\end{tabular}
+
+\bigskip
+
+\ejercicio{El escritor automático}
+El código que sigue define las clases 
+\texttt{YoAprendi}, \texttt{YoAprendiConfigurable}, 
+\texttt{YoFui}, \\ \texttt{YoFuiDeportivo},
+\texttt{YoAprendiEnEscuela}, \texttt{AprendiBaile},
+\texttt{AprendiBienBaile}, \\ \texttt{AprendiSalsa}, \texttt{AprendiSalsaLunes} 
+y \texttt{Escuela}.
+
+\medskip\noindent
+\lstinputlisting[language=Wollok]{methodLookupFrases.wlk}
+
+Se pide: 
+
+a) \\
+Armar el diagrama de clases que incluya las 10 clases definidas, indicando la herencia y qué métodos se definen en cada una, y además, cuáles de estas clases son abstractas.
+
+\medskip\noindent
+b) \\
+Indicar qué valores hay que poner en reemplazo de \\
+\texttt{sui, nadar, nadarC, ing, salsi, salsiL} \\
+para que el siguiente test dé verde.
+
+\noindent
+\lstinputlisting[language=Wollok,firstline=2]{methodLookupFrasesTest.wtest}
+
+\medskip\noindent
+c) \\
+Definir la clase \texttt{AprendiTango}, que a partir de una acción complementaria y un lugar, arme la frase \\
+``Yo aprendi a bailar y $\langle\langle$acción complementaria$\rangle\rangle$ tango en $\langle\langle$lugar$\rangle\rangle$.''
+
+P.ej. si definimos como acción complementaria ``disfrutar'' y como lugar ``El Beso'', la frase queda: \\
+``Yo aprendi a bailar y disfrutar tango en El Beso.''
+
+Armar \texttt{AprendiTango} a partir de las clases que están implementadas, separando en acción (que incluye siempre ``bailar y'' más la complementaria), objeto (que es tango), y final (que es el lugar con ``en'' adelante).
+
+\newpage
+\ejercicio{Trace}
+A partir de las siguientes clases:
+\lstinputlisting[language=Wollok]{methodLookupTrace.wlk}
+
+\medskip\noindent
+Indicar que devuelve cada línea de código:
+\lstinputlisting[language=Wollok,linerange=4-20]{methodLookupTrace.wtest}
+\newpage
+
+\ejercicio{Trace 2}
+Dadas las siguientes clases
+\lstinputlisting{methodLookupTrace2.wlk}
+
+Indique que devuelve cada línea de código:
+\lstinputlisting[firstline=4,lastline=14]{methodLookupTrace2.wpgm}
+
+\newpage
+\ejercicio{Gritos}
+A partir de las siguientes clases:
+\lstinputlisting[language=Wollok]{methodLookupGritos.wlk}
+
+Indicar que devuelve cada línea de código:
+\lstinputlisting[language=Wollok,linerange=4-7]{methodLookupGritos.wpgm}
+
+\bigskip
+De este te damos las \textbf{respuestas} \\[4pt]
+\begin{tabular}{ll}
+Gritador & uyUY!! \\
+Gritador1 & ayayAAH!! \\
+Gritador2 & aaayAAH!!aaayAAHaaay \\
+Gritador3 & aaayEEEaaay
+\end{tabular}
+\newpage
+\ejercicio{Vikingos}
+Dadas las siguientes clases
+\lstinputlisting{methodLookupVikingos.wlk}
+
+Indique que devuelve cada línea de código:
+\lstinputlisting[firstline=5,lastline=8]{methodLookupVikingos.wpgm}
+
+\textbf{Nota}:
+Recordar que las listas entienden el mensaje $+$ para concatenar. El resultado es una nueva lista. P.ej. el resultado de \\
+\verb2["alfa","beta"] + ["gamma","iota","epsilon"] + [] + ["omega"]2
+es \\
+\verb2["alfa","beta","gamma","iota","epsilon","omega"]2
+\newpage
+\ejercicio{Skills}
+Dadas las siguientes clases
+\lstinputlisting{methodLookupSkills.wlk}
+
+Indique que devuelve cada línea de código:
+\lstinputlisting[firstline=5,lastline=9]{methodLookupSkills.wpgm}
+
+\newpage
+\ejercicio{Jedi}
+Dadas las siguientes clases
+\lstinputlisting{methodLookupJedi.wlk}
+
+Indique que devuelve cada línea de código:
+\lstinputlisting[firstline=4,lastline=8]{methodLookupJedi.wpgm}
+
+\newpage
+\ejercicio{Soldados}
+Dadas las siguientes clases
+\lstinputlisting{methodLookupSoldados.wlk}
+
+Indique que devuelve cada línea de código:
+\lstinputlisting[firstline=4,lastline=8]{methodLookupSoldados.wpgm}
+
+\newpage
+\section{Polimorfismo}
+\ejercicio{Exámenes}
+Reorganice y modifique el siguiente código utilizando polimorfismo para mejorar la distribución de responsabilidades. Se permite (de hecho, se alienta a) agregar más clases a las planteadas, pasando parte del código a las nuevas clases.
+
+\medskip\noindent
+\lstinputlisting[language=Wollok]{polimorfismoExamen.wlk}
+
+
+
+\ejercicio{Renderización de una pantalla}
+Reorganice y modifique el siguiente código utilizando polimorfismo para mejorar la distribución de responsabilidades. Se permite (de hecho, se alienta a) agregar más clases a las planteadas, pasando parte del código a las nuevas clases.
+
+Tener en cuenta las siguientes aclaraciones:
+\begin{itemize}
+	\item Los métodos no desarrollados en la clase \texttt{Pantalla} indican que una pantalla sabe trazar una línea en un color a partir de la posición de un cursor, y también mover el cursor. La implementación de estas operaciones no está entre el código que debe reorganizar.
+	\item Obsérvese que para dibujar una figura, antes de empezar hay que prender el cursor, y lo último que hay que hacer es apagarlo. Estas también son operaciones responsabilidad de la pantalla, y que no están incluidas en la reorganización de código.
+	\item Nótese también que cada figura debe ser dibujada en rojo y en verde, esto es cierto tanto para las figuras que han sido implementadas, como para las que pudieran agregarse. También, hay que tener en cuenta que después de dibujar una figura, el cursor debe estar en el mismo lugar en el que estaba antes de empezar a dibujarla.
+\end{itemize}
+\medskip\noindent
+\lstinputlisting[language=Wollok]{polimorfismoPantalla.wlk}
+
+
+\ejercicio{Movimientos del ajedrez}
+Reorganice y modifique el siguiente código utilizando polimorfismo para mejorar la distribución de responsabilidades. Se permite (de hecho, se alienta a) agregar más clases a las planteadas, pasando parte del código a las nuevas clases.
+
+El objetivo de este código es saber si una pieza de ajedrez puede moverse a una determinada posición. Las condiciones están simplificadas respecto de las reglas verdaderas del juego.
+
+\medskip\noindent
+\lstinputlisting[language=Wollok]{polimorfismoAjedrez.wlk}
+
+\ejercicio{Ensamblador}
+Hace ya unos años que Volkswagen Argentina fabrica en su planta de Pacheco los modelos: Fox y Amarok (en sus dos versiones: volante derecho y volante izquierdo). Se está pensando fabricarlos en la misma planta el modelo Vento a la línea de ensamblado, con lo cual nos pidieron modificar el sistema.
+
+Revisando el código, encontramos lo siguiente:
+\lstinputlisting[language=Wollok]{polimorfismoAutos.wlk}
+
+Se pide:
+\begin{enumerate}
+	\item Criticar la solución propuesta (Especial atención en la repetición de código, la distribución de responsabilidades y el uso o ausencia de polimorfismo. 
+	\item Indicar qué se debe modificar en este código para agregar el modelo Vento. 			Escribir cómo sería la línea que construye un auto Vento, es decir, a qué clase se le hace \emph{new} y en caso de recibir parámetro/s en el constructor, cuál/es es/son. 
+	\item Refactorizar el código para solucionar los problemas detectados en a. ¡Vale agregar nuevas clases y mensajes!. Indicar cómo quedarían las primeras dos líneas del test.
+
+\end{enumerate}
+\newpage
+\ejercicio{Centrales eléctricas}
+En un modelo del sistema de producción y transmisión eléctrica de un país, tenemos las clases \code{SistemaInterconectado}, \code{CentralHidrica}, \code{CentralAtomica} y \code{CentralACarbon}. 
+Un sistema inteconectado incluye varias centrales.
+La capacidad de generación de un sistema inteconectado es la suma de la capacidad de generación de cada una de sus centrales. Para calcularla se agregó este método
+
+\lstinputlisting[language=Wollok]{polimorfismoCentrales.wlk}
+
+Se pide:
+\begin{itemize}
+\item Suponiendo que las centrales hídricas son las únicas que responden \code{true} cuando se les pregunta \code{esHidrica()} y análogamente para las otras, indicar a través de un diagrama de clase qué mensajes entienden los distintos tipos de central según lo que se puede apreciar en el método \code{capacidadDeGeneracion()} de la clase \code{SistemaInterconectado}
+\item Para otro sistema que está haciendo el mismo grupo de desarrolladores se deben modelar plantas de aluminio. Una planta de aluminio tiene una única central generadora de energía (que puede ser hídrica, atómica o a carbón) de la cual se va a necesitar saber su capacidad de generación. Supongamos que las centrales solamente entienden los mensajes que se utilizan en el método \code{capacidadDeGeneracion()} de la clase \code{SistemaInterconectado}.
+Hay un problema de asignación de responsabilidades que impide usar el modelo de centrales eléctricas para la planta de aluminio. Indicar cuál es el problema (o sea, qué objeto está haciendo una cosa que no le corresponde) y cómo corregirlo (o sea, qué método/s habría que agregar o modificar en qué clase/s, escribiendo el código correspondiente).
+\item Qué concepto se está utilizando en su solución del punto b que no se estaba aprovechando en la solución propuesta por el enunciado?
+\end{itemize}
+\newpage
+\ejercicio{Comedero}
+\begin{enumerate}[a)]
+\item Analice el siguiente código y escriba un breve párrafo acerca de la distribución de responsabilidades entre los objetos/clases involucradas. 
+\item Modifique el código utilizando polimorfismo para mejorar la distribución de responsabilidades.
+\end{enumerate}
+
+\lstinputlisting[language=Wollok]{polimorfismoComedero.wlk}
+
+\ejercicio{Misiones}
+Modifique el código utilizando polimorfismo, organización del comportamiento entre las clases, y (en un caso) mensajes adecuados a las colecciones, para mejorar la distribución de responsabilidades. Evite el código duplicado.
+\lstinputlisting{polimorfismoMisiones.wlk}
+\lstinputlisting[firstline=2]{polimorfismoMisiones.wtest}
+
+\ejercicio{Turismo}
+Modifique el código utilizando polimorfismo, organización del comportamiento entre las clases, y (en un caso) mensajes adecuados a las colecciones, para mejorar la distribución de responsabilidades. Evite el código duplicado.
+Mejore si corresponde los lanzamientos de errores.
+\lstinputlisting{polimorfismoTurismo.wlk}
+\lstinputlisting[firstline=2]{polimorfismoTurismo.wtest}
+
+\ejercicio{Transporte}
+Modifique el código utilizando polimorfismo, organización del comportamiento entre las clases, y (en un caso) mensajes adecuados a las colecciones, para mejorar la distribución de responsabilidades.
+\lstinputlisting{polimorfismoTransporte.wlk}
+
+
+\newpage
+\section{Referencias}
+\ejercicio{Mascotas}
+Teniendo en cuenta las siguientes clases:
+\lstinputlisting[language=Wollok]{referenciasMascotas.wlk}
+\parte{Estado inicial}
+Construya el grafo de objetos luego de ejecutar el siguiente código:
+\lstinputlisting[language=Wollok,linerange=4-13]{referenciasMascotas.wpgm}
+\parte{Estado Final}
+Tomando el estado configurado como inicial, ejecute el siguiente código y construya el grafo de objetos final. En caso de que alguna línea lance un error, indique el motivo del mismo e ignórela.
+\lstinputlisting[language=Wollok,linerange=15-22]{referenciasMascotas.wpgm}
+
+\ejercicio{Empresas}
+Teniendo en cuenta las siguientes clases:
+\lstinputlisting[language=Wollok]{referenciasEmpresas.wlk}
+\parte{Estado inicial}
+Construya el grafo de objetos luego de ejecutar el siguiente código:
+\lstinputlisting[language=Wollok,linerange=4-12]{referenciasEmpresas.wpgm}
+\parte{Estado Final}
+Tomando el estado configurado como inicial, ejecute el siguiente código y construya el grafo de objetos final. En caso de que alguna línea lance un error, indique el motivo del mismo e ignórela.
+\lstinputlisting[language=Wollok,linerange=14-21]{referenciasEmpresas.wpgm}
+
+\ejercicio{Sobrinos de Donald}
+Teniendo en cuenta las siguientes clases:
+\lstinputlisting[language=Wollok]{referenciasSobrinosDonald.wlk}
+\parte{Estado inicial}
+Construya el grafo de objetos luego de ejecutar el siguiente código:
+\lstinputlisting[language=Wollok,linerange=4-13]{referenciasSobrinosDonald.wpgm}
+\parte{Estado Final}
+Tomando el estado configurado como inicial, ejecute el siguiente código y construya el grafo de objetos final. En caso de que alguna línea lance un error, indique el motivo del mismo e ignórela.
+\lstinputlisting[language=Wollok,linerange=15-23]{referenciasSobrinosDonald.wpgm}
+
+\ejercicio{Guitarras}
+Teniendo en cuenta las siguientes clases:
+\lstinputlisting[language=Wollok]{referenciasGuitarras.wlk}
+\parte{Estado inicial}
+Construya el grafo de objetos luego de ejecutar el siguiente código:
+\lstinputlisting[language=Wollok,linerange=4-9]{referenciasGuitarras.wpgm}
+\parte{Estado Final}
+Tomando el estado configurado como inicial, ejecute el siguiente código y construya el grafo de objetos final. En caso de que alguna línea lance un error, indique el motivo del mismo e ignórela.
+\lstinputlisting[language=Wollok,linerange=11-20]{referenciasGuitarras.wpgm}
+
+
+\ejercicio{Bonificaciones}
+Dadas las siguientes clases:
+\lstinputlisting[language=Wollok]{referenciasBonificaciones.wlk}
+
+
+\newpage
+Dibuje el grafo de objetos luego de ejecutar el siguiente código:
+
+\lstinputlisting[firstline=4,lastline=12]{referenciasBonificaciones.wpgm}
+
+\parte{Estado final}
+Dibuje el grafo de objetos luego de ejecutar el siguiente código:
+
+\lstinputlisting[firstline=14,lastline=19]{referenciasBonificaciones.wpgm}
+
+\ejercicio{Juguetes}
+
+Dada las siguientes clases:
+\lstinputlisting{referenciasJuguetes.wlk}
+
+
+\bigskip
+\parte{Estado inicial}
+Dibuje el grafo de objetos luego de ejecutar el siguiente código:
+
+\lstinputlisting[firstline=4,lastline=9]{referenciasJuguetes.wtest}
+
+\parte{Estado final}
+El siguiente código se ejecuta \emph{luego del anterior}.
+\lstinputlisting[firstline=11,lastline=19]{referenciasJuguetes.wtest}
+
+Analizar para cada línea si se puede evaluar correctamente o si, por el contrario, se produce un error. 
+Indique las líneas que producen errores y \textbf{las causas} de los mismos. Dibuje el grafo de objetos resultante de la evaluación, ignorando las líneas que producen errores. Recordar que si un objeto no entiende el mensaje se produce error. Así que sean cuidadosos porque puede pasar de manera intencional.  
+
+\ejercicio{Popeye}
+Dada las siguientes clases:
+\lstinputlisting{referenciasPopeye.wlk}
+\bigskip
+\parte{Estado inicial}
+Dibuje el grafo de objetos luego de ejecutar el siguiente código:
+\lstinputlisting[firstline=5,lastline=12]{referenciasPopeye.wtest}
+\parte{Estado final}
+El siguiente código se ejecuta \emph{luego del anterior}.
+\lstinputlisting[firstline=15,lastline=23]{referenciasPopeye.wtest}
+Analizar para cada línea si se puede evaluar correctamente o si, por el contrario, se produce un error. Indique las líneas que producen errores y \textbf{las causas} de los mismos. Dibuje el grafo de objetos resultante de la evaluación, ignorando las líneas que producen errores. Recordar que si un objeto no entiende el mensaje se produce error. Así que sean cuidadosos porque puede pasar de manera intencional.  
+
+\ejercicio{Heman}
+Dada las siguientes clases:
+\lstinputlisting{referenciasHeman.wlk}
+\bigskip
+\parte{Estado inicial}
+Dibuje el grafo de objetos luego de ejecutar el siguiente código:
+\lstinputlisting[firstline=5,lastline=12]{referenciasHeman.wtest}
+\parte{Estado final}
+El siguiente código se ejecuta \emph{luego del anterior}.
+\lstinputlisting[firstline=15,lastline=23]{referenciasHeman.wtest}
+Analizar para cada línea si se puede evaluar correctamente o si, por el contrario, se produce un error. Indique las líneas que producen errores y \textbf{las causas} de los mismos. Dibuje el grafo de objetos resultante de la evaluación, ignorando las líneas que producen errores. Recordar que si un objeto no entiende el mensaje se produce error. Así que sean cuidadosos porque puede pasar de manera intencional.  
+
+\ejercicio{Jugadores}
+
+Dada las siguientes clases:
+\lstinputlisting{referenciasJugadores.wlk}
+
+\bigskip
+\parte{Estado inicial}
+Dibuje el grafo de objetos luego de ejecutar el siguiente código:
+
+\lstinputlisting[firstline=5,lastline=10]{referenciasJugadores.wtest}
+
+\parte{Estado final}
+El siguiente código se ejecuta \emph{luego del anterior}.
+\lstinputlisting[firstline=13,lastline=20]{referenciasJugadores.wtest}
+
+Analizar para cada línea si se puede evaluar correctamente o si, por el contrario, se produce un error. 
+Indique las líneas que producen errores y cual es el error. Dibuje el grafo de objetos resultante de la evaluación, ignorando las líneas que producen errores.
+
+Recordar que:
+\begin{itemize}
+	\item el \verb2map2 aplicado a una lista devuelve una lista.
+	\item una lista puede contener repetidos.
+	\item al agregar un elemento a una lista, se agrega al final.
+	\item si un objeto no entiende el mensaje se produce error. Así que sean cuidadosos porque puede pasar de manera intencional.  
+\end{itemize}
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+

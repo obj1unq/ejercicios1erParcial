@@ -1,0 +1,50 @@
+import referenciasJuguetes.*
+test "testParaEnunciado (rompe)" {
+
+	var pepa = new Juguete("rosa")
+	var mcqueen = new Juguete("rojo")
+	var minion = new Juguete("amarillo")
+	var patito = new Juguete("amarillo")
+	var enCasa = new GrupoDeJuguetes(#{pepa,mcqueen,minion,patito,pelota})
+	var paraViajar = new GrupoDeJuguetes(#{minion,patito})
+	
+	var x = patito == minion
+	pepa = pelota
+	var y = enCasa.colores().contains("rosa")
+	paraViajar.pintar("rojo")
+	var z = enCasa.colores().contains("amarillo")
+	mcqueen.color(patito)
+	var coloresDeCasa = enCasa.colores()
+	enCasa.pintar("amarillo")
+	paraViajar.colores().agregarJuguete(pelota)	
+}
+
+test "correccion" {
+	var pepa = new Juguete("rosa")
+	var mcqueen = new Juguete("rojo")
+	var minion = new Juguete("amarillo")
+	var patito = new Juguete("amarillo")
+	
+	var enCasa = new GrupoDeJuguetes(#{pepa,mcqueen,minion,patito,pelota})
+	
+	var paraViajar = new GrupoDeJuguetes(#{minion,patito})
+	
+	var x = patito == minion
+	pepa = pelota
+	var y = enCasa.colores().contains("rosa")
+	paraViajar.pintar("rojo")
+	var z = enCasa.colores().contains("amarillo")
+	mcqueen.color(patito)
+	var coloresDeCasa = enCasa.colores()
+	assert.throwsException({enCasa.pintar("amarillo")})
+	assert.throwsException({paraViajar.colores().agregarJuguete(pelota)})
+	
+	assert.notThat(x)
+	assert.equals(pepa, pelota)
+	assert.that(y)
+	assert.equals("rojo", patito.color())
+	assert.equals("rojo", minion.color())
+	assert.notThat(z)
+	assert.equals(#{"rojo", "rosa", patito}, coloresDeCasa)
+	
+}

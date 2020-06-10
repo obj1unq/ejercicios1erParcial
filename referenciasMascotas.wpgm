@@ -1,0 +1,24 @@
+import referenciasMascotas.*
+program abc {
+
+var hijitus = new Duenio()
+var linyera = new Duenio() 	
+var tom = new Duenio()
+var pichichus = new Perro()
+pichichus.duenio(hijitus)
+var diogenes = new Perro()
+diogenes.duenio(linyera)
+var garfield = new Animal()
+garfield.duenio(tom)
+var animales = #{pichichus, diogenes, garfield}
+	
+pichichus.duenio(garfield.duenio())
+hijitus = garfield.aguante()
+diogenes = diogenes.aguante()
+animales.remove(diogenes)
+pichichus = hijitus == animales.size()
+animales.add(garfield.duenio())
+var duenios = animales.map({x => x.duenio()})
+
+
+}

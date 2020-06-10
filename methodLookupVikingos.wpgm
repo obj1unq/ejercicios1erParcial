@@ -1,0 +1,18 @@
+import methodLookupVikingos.*
+
+program abc {
+
+	new Vikingo().accionesDeSaqueo()
+	new Conde().accionesDeSaqueo()
+	new Rey().accionesDeSaqueo()
+	new Profeta().accionesDeSaqueo()
+
+
+
+	console.println(new Vikingo().accionesDeSaqueo())
+	console.println(new Conde().accionesDeSaqueo())
+	console.println(new Rey().accionesDeSaqueo())
+	console.println(new Profeta().accionesDeSaqueo())
+	
+
+}

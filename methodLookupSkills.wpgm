@@ -1,0 +1,20 @@
+import methodLookupSkills.*
+
+program abc {
+
+	new Junior().actividades()
+	new SemiSenior().actividades()
+	new Senior().actividades()
+	new Ninja().actividades()
+	new Acomodado().actividades()
+
+
+
+	console.println(new Junior().actividades())
+	console.println(new SemiSenior().actividades())
+	console.println(new Senior().actividades())
+	console.println(new Ninja().actividades())
+	console.println(new Acomodado().actividades())
+	
+
+}

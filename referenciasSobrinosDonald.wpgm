@@ -1,0 +1,25 @@
+import referenciasSobrinosDonald.*
+program abc {
+
+	var hugo = new Sociable()
+	var paco = new Sociable()
+	var luis = new Ermitanio()
+	hugo.amigo(paco)
+	paco.amigo(luis)  	
+	var hogar = new Casa()
+	hogar.agregarPersona(hugo)
+	hogar.agregarPersona(paco)
+	hogar.agregarPersona(luis)
+	var cortapalos = new Club()
+	
+	cortapalos.agregarPersona(hugo)
+	cortapalos.agregarPersona(luis)
+	hugo.amigo(hogar.masNuevo())	
+	paco = cortapalos
+	paco.agregarPersona(hogar)
+	var amigos = paco.personas().map({x => x.amigo()})
+	hugo.amigo(hugo)
+	luis.amigo(hugo)
+	var amigoDeHugo = hugo.amigo()
+	
+}

@@ -1,0 +1,14 @@
+import polimorfismoMisiones.*
+
+test "ambiente" {
+
+	var mundo = new Mundo()
+	var obj1 = new Objetivo()
+	obj1.configurarComoSupervivencia(1500)
+	var obj2 = new Objetivo()
+	obj2.configurarParaDefenderAliados(5)
+	var objetivo = new ObjetivoMultiple(#{obj1, obj2})
+	var mision = new Mision(objetivo, mundo)
+	assert.notThat(mision.esExitosa())
+
+}

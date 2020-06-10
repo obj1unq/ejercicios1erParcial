@@ -1,0 +1,28 @@
+import referenciasBonificaciones.*
+program abc {
+
+	var juan = new Empleado()
+	var pedro = new Empleado()
+	var santiago = new Empleado()
+	var roque = new Jefe()
+	var luis = new Jefe()
+	roque.addEmpleado(juan)
+	roque.addEmpleado(pedro)
+	luis.addEmpleado(santiago)
+	luis.addEmpleado(roque)
+
+	luis.bonificar(10)
+	roque.bonificar(2)
+	pedro.bonificar(5)
+	luis.addEmpleado(roque.preferido())
+	luis.addEmpleado(pedro.preferido())
+	var preferidoLuis = luis.preferido()
+	///////////////////////////////////
+	console.println('juan ' + juan)
+	console.println('pedro ' + pedro)
+	console.println("santiago " + pedro)
+	console.println("roque " + pedro)
+	console.println("luis " + pedro)
+	console.println("preferidoLuis " + preferidoLuis)
+
+}

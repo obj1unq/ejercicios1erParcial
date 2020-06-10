@@ -1,0 +1,8 @@
+import methodLookupVirus.*
+test "ejemplos de virus" {
+	var virus1 = new VirusGordito()
+	var virus2 = new VirusRechonchito()
+	var virus3 = new VirusConLiquido()
+	var virus4 = new VirusConLiquidoDenso()
+	var pepe = new Ornitorrinco()
+}

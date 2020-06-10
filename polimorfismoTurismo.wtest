@@ -1,0 +1,21 @@
+import polimorfismoTurismo.*
+test "reservaExitosa" {
+	var luchoHotel = new Servicio(50)
+	var micro = new Servicio(30)
+	var combi = new Servicio(15)
+	var cityTour = new Servicio(10) 
+	luchoHotel.configurarComoHotel(2)
+	micro.configurarComoVehiculo(true, true)
+	combi.configurarComoVehiculo(true, true)
+	cityTour.configurarComoTour(combi, false)
+	var paquete = new Paquete(#{luchoHotel, micro, cityTour}, 2, false)
+	
+	assert.that(paquete.sePuedeReservar())
+	paquete.reservar()
+	assert.that(paquete.estaReservado())
+	assert.equals(48, luchoHotel.lugaresDisponibles())
+	assert.equals(28, micro.lugaresDisponibles())
+	assert.equals(8, cityTour.lugaresDisponibles())
+	assert.equals(13, combi.lugaresDisponibles())
+}
+

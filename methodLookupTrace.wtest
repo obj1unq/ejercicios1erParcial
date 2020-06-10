@@ -1,0 +1,42 @@
+import methodLookupTrace.*
+test "testX" {
+
+	var o = new A()
+	o.m1()
+	o.m2()
+	o.m3()
+	o.m4()
+
+	o = new B()
+	o.m1()
+	o.m2()
+	o.m3()
+	o.m4()
+
+	o = new C()
+	o.m1()
+	o.m2()
+	o.m3()
+	o.m4()
+
+}
+
+//test "solution" {
+//	var o = new A()
+//	console.println(o.m1())
+//	console.println(o.m2())
+//	console.println(o.m3())
+//	assert.throwsException({=>console.println(o.m4())})
+//
+//	o = new B()
+//	console.println(o.m1())
+//	console.println(o.m2())
+//	console.println(o.m3())
+//	console.println(o.m4())
+//
+//	o = new C()
+//	console.println(o.m1())
+//	console.println(o.m2())
+//	console.println(o.m3())
+//	console.println(o.m4())	
+//}

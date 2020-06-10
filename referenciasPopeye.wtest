@@ -1,0 +1,65 @@
+import referenciasPopeye.*
+test "test para enunciado" {
+
+
+	var brutus = new Marinero()
+	var olivia = new Marinero()
+	var cocoliso = new Marinero()
+	var perlaNegra = new Barco()
+	var interceptor = new Barco()
+	perlaNegra.agregarMarinero(brutus)
+	perlaNegra.agregarMarinero(olivia)
+	perlaNegra.agregarMarinero(popeye)
+	
+
+	var x = brutus == olivia
+	brutus.comerEspinaca()
+	brutus = cocoliso
+	var y = perlaNegra.masFuerte()
+	var z = brutus == y
+	perlaNegra.alimentarMarineros()
+	interceptor.agregarMarinero(perlaNegra.masFuerte())	
+	interceptor.agregarMarinero(perlaNegra)
+	interceptor.alimentarMarineros()	
+
+}
+
+test "test" {
+
+
+	var brutus = new Marinero()
+	var olivia = new Marinero()
+	var cocoliso = new Marinero()
+	var perlaNegra = new Barco()
+	var interceptor = new Barco()
+	
+	perlaNegra.agregarMarinero(brutus)
+	perlaNegra.agregarMarinero(olivia)
+	perlaNegra.agregarMarinero(popeye)
+	
+
+	var x = brutus == olivia
+	assert.notThat(x)
+	brutus.comerEspinaca()
+	assert.equals(20, brutus.fuerza())
+	brutus = cocoliso
+	var y = perlaNegra.masFuerte()
+	assert.notThat(#{brutus, olivia, cocoliso, popeye}.contains(y))
+	var z = brutus == y
+	assert.notThat(z)
+	perlaNegra.alimentarMarineros()
+	
+	assert.equals(1000, popeye.fuerza())
+	assert.equals(10, brutus.fuerza())
+	assert.equals(10, cocoliso.fuerza())
+	assert.equals(20, olivia.fuerza())
+	assert.equals(30, y.fuerza())
+	
+	interceptor.agregarMarinero(perlaNegra.masFuerte())
+	assert.that(interceptor.marineros().contains(popeye))	
+	interceptor.agregarMarinero(perlaNegra)
+	assert.that(interceptor.marineros().contains(perlaNegra))	
+	assert.throwsException({interceptor.alimentarMarineros()})	
+
+}
+

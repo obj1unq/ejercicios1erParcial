@@ -1,0 +1,22 @@
+import referenciasGuitarras.*
+program abc {
+
+	var criolla = new Guitarra()
+	var acustica12 = new Guitarra()
+	acustica12.cuerdas(12)
+	var lucille = new GuitarraElectrica()
+	var marshall = new Equipo()
+	lucille.equipo(marshall)
+	
+	marshall.ganancia(lucille.volumen())
+	acustica12.cuerdas(marshall.ganancia() / 100 )
+	var x = criolla.cuerdas() == acustica12.cuerdas()
+	lucille.equipo(criolla.cuerdas())
+	lucille.cuerdas(lucille.volumen())
+	lucille.equipo(marshall)
+	criolla = marshall
+	marshall = new Equipo()
+	marshall.ganancia(5)
+	var volumenFinal = lucille.volumen()
+	 
+}

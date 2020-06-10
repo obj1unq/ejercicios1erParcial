@@ -1,0 +1,17 @@
+import methodLookupJedi.*
+program prueba {
+
+	new Personaje().habilidades()
+	new Padawan().habilidades()
+	new Jedi().habilidades()
+	new MaestroJedi().habilidades()
+	new LordSith().habilidades()
+
+	console.println(new Personaje().habilidades())
+	console.println(new Padawan().habilidades())
+	console.println(new Jedi().habilidades())
+	console.println(new MaestroJedi().habilidades())
+	console.println(new LordSith().habilidades())
+
+
+}

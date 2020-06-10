@@ -1,0 +1,23 @@
+import referenciasEmpresas.*
+program abc {
+
+var mexicano = new Persona()
+var chino = new Persona()
+var argentino = new Persona()
+var saraza = new Empresa()
+var cadornaCo = new Empresa()
+saraza.director(chino)
+cadornaCo.director(argentino)
+var empresas = [saraza, cadornaCo]
+var directores
+
+mexicano = cadornaCo
+chino.director(chino)
+cadornaCo.director(mexicano)
+empresas.add(chino)
+directores = empresas.map({unaEmpresa => unaEmpresa.director()})
+directores = empresas
+directores.remove(chino)
+directores = empresas.map({unaEmpresa => unaEmpresa.director()})
+
+}

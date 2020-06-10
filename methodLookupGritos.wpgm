@@ -1,0 +1,18 @@
+import methodLookupGritos.*
+program abc {
+
+	new Gritador().gritar()
+	new Gritador1().gritar()
+	new Gritador2().gritar()
+	new Gritador3().gritar()
+
+	//Descomentar para saber el resultado
+	// ojo! primero tenes que hacerlo a mano
+	// si querés aprender!
+	//
+	//console.println(new Gritador().gritar())
+	//console.println(new Gritador1().gritar())
+	//console.println(new Gritador2().gritar())
+	//console.println(new Gritador3().gritar())
+
+}

@@ -1,0 +1,26 @@
+import methodLookupTrace2.*
+
+program abc {
+    var p
+			
+	p = new Madre()
+	p.m1()
+	p.m2()
+	p.m3()
+	
+	p = new Hija()	
+	p.m1()
+	p.m2()
+	p.m3()
+ 
+////////////////// Solucion ////////////////
+//	p = new Madre()
+//	console.println(p.m1())
+//	console.println(p.m2())
+//	console.println(p.m3())
+//	
+//	p = new Hija()	
+//	console.println(p.m1())
+//	console.println(p.m2())
+//	console.println(p.m3())
+}

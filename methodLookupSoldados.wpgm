@@ -1,0 +1,17 @@
+import methodLookupSoldados.*
+program prueba {
+
+	new Soldado().habilidades()
+	new Cabo().habilidades()
+	new Sargento().habilidades()
+	new Teniente().habilidades()
+	new Coronel().habilidades()
+
+	console.println(new Soldado().habilidades())
+	console.println(new Cabo().habilidades())
+	console.println(new Sargento().habilidades())
+	console.println(new Teniente().habilidades())
+	console.println(new Coronel().habilidades())
+
+
+}

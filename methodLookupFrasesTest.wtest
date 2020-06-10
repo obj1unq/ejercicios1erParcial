@@ -1,0 +1,37 @@
+import methodLookupFrases.*
+test "frases" { 
+		var icana = new Escuela(
+			"ICANA", "hablar", "ingles"      // nombre, accion, objeto
+		)
+		
+    var sui = new YoAprendiConfigurable(
+			"ser", "formal y cortes",                // accion, objeto
+			"cortandome el pelo una vez por mes"     // final
+		)
+
+    var nadar = new YoFui(
+			"nadar", "crawl", "al rio"     // accion, objeto, final
+		)
+		
+    var nadarCopado = new YoFuiDeportivo(
+			"nadar", "crawl", "al rio"     // accion, objeto, final
+		)
+		
+    var inglish = new YoAprendiEnEscuela(icana)     // escuela
+		
+    var salsita = new AprendiSalsa(
+			"el mes pasado"     // cuando
+		)
+
+    var salsitaLunes = new AprendiSalsaLunes (
+			"el mes pasado"     // cuando
+		)
+		
+		assert.equals(/* sui */, sui.frase())
+		assert.equals(/* nadar */, nadar.frase())
+		assert.equals(/* nadarC */, nadarCopado.frase())
+		assert.equals(/* ing */, inglish.frase())
+		assert.equals(/* salsi */, salsita.frase())
+		assert.equals(/* salsiL */, salsitaLunes.frase())
+}
+

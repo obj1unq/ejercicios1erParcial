@@ -1,0 +1,65 @@
+import referenciasHeman.*
+test "test para enunciado" {
+
+
+	var manatarms = new MasterOfUniverse()
+	var teela = new MasterOfUniverse()
+	var orko = new MasterOfUniverse()
+	var palacio = new Castillo()
+	var grayskull = new Castillo()
+	palacio.agregarMaestro(manatarms)
+	palacio.agregarMaestro(teela)
+	palacio.agregarMaestro(heman)
+	
+
+	var x = manatarms == teela
+	manatarms.gritoDeGuerra()
+	manatarms = orko
+	var y = palacio.masFuerte()
+	var z = manatarms == y
+	palacio.enfurecer()
+	grayskull.agregarMaestro(palacio.masFuerte())	
+	grayskull.agregarMaestro(palacio)
+	grayskull.enfurecer()	
+
+}
+
+test "test" {
+
+
+	var manatarms = new MasterOfUniverse()
+	var teela = new MasterOfUniverse()
+	var orko = new MasterOfUniverse()
+	var palacio = new Castillo()
+	var grayskull = new Castillo()
+	
+	palacio.agregarMaestro(manatarms)
+	palacio.agregarMaestro(teela)
+	palacio.agregarMaestro(heman)
+	
+
+	var x = manatarms == teela
+	assert.notThat(x)
+	manatarms.gritoDeGuerra()
+	assert.equals(30, manatarms.fuerza())
+	manatarms = orko
+	var y = palacio.masFuerte()
+	assert.notThat(#{manatarms, teela, orko, heman}.contains(y))
+	var z = manatarms == y
+	assert.notThat(z)
+	palacio.enfurecer()
+	
+	assert.equals(2000, heman.fuerza())
+	assert.equals(20, manatarms.fuerza())
+	assert.equals(20, orko.fuerza())
+	assert.equals(30, teela.fuerza())
+	assert.equals(40, y.fuerza())
+	
+	grayskull.agregarMaestro(palacio.masFuerte())
+	assert.that(grayskull.maestros().contains(heman))	
+	grayskull.agregarMaestro(palacio)
+	assert.that(grayskull.maestros().contains(palacio))	
+	assert.throwsException({grayskull.enfurecer()})	
+
+}
+

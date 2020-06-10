@@ -1,0 +1,46 @@
+import referenciasJugadores.*
+test "examen" {
+	
+	//grafo inicial
+	var bochini = new Jugador(distefano, 97)
+	var maradona = new Jugador(bochini, 352)
+	var riquelme = new Jugador(maradona, 165)
+	var francescoli = new Jugador(distefano, 244)
+	var zidane = new Jugador(francescoli, 153) 
+	var estrellas = new Equipo([riquelme, zidane, maradona])
+	
+	//grafo final
+	var historicos = estrellas.idolos()
+	var goleador = historicos.goleador()
+	historicos = historicos.idolos()
+	var megaGoleador = historicos.goleador()
+	bochini.idolo(maradona.idolo())
+	var goles = estrellas.sum({unJugador => unJugador.goles()})
+	historicos.agregarJugador(estrellas)
+	goleador = historicos.goleador()
+}
+test "examen Resuelto"{ 
+	//grafo inicial
+	var bochini = new Jugador(distefano, 97)
+	var maradona = new Jugador(bochini, 352)
+	var riquelme = new Jugador(maradona, 165)
+	var francescoli = new Jugador(distefano, 244)
+	var zidane = new Jugador(francescoli, 153) 
+	var estrellas = new Equipo([riquelme, zidane, maradona])
+	
+	//grafo final
+	var historicos = estrellas.idolos()
+	assert.equals([maradona, francescoli, bochini], historicos.jugadores())
+    var goleador = historicos.goleador()
+	assert.equals(maradona, goleador)
+    historicos = historicos.idolos()
+	assert.equals([bochini, distefano, distefano], historicos.jugadores())
+	var i = estrellas.idolos()
+    historicos.jugadores().add(i)
+    assert.equals([bochini, distefano, distefano,i], historicos.jugadores())
+    assert.throwsException({historicos.goleador()})
+  	bochini.idolo(maradona.idolo())
+  	assert.equals(bochini, bochini.idolo())
+	assert.throwsException({estrellas.sum({unJugador => unJugador.goles()})})
+	
+}
